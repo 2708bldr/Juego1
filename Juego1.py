@@ -1,87 +1,88 @@
 """Paint, for drawing shapes.
 
 Exercises
-
-1. Add a color.
-2. Complete circle.
-3. Complete rectangle.
+1. Add a color.           ✅ (purple / P)
+2. Complete circle.       ✅
+3. Complete rectangle.    ✅
 4. Complete triangle.
-5. Add width parameter.
 """
 
+import turtle
+import math
 from turtle import *
-
 from freegames import vector
-
 
 def line(start, end):
     """Draw line from start to end."""
-    up()
-    goto(start.x, start.y)
-    down()
-    goto(end.x, end.y)
-
+    up(); goto(start.x, start.y); down(); goto(end.x, end.y)
 
 def square(start, end):
     """Draw square from start to end."""
-    up()
-    goto(start.x, start.y)
-    down()
-    begin_fill()
-
-    for count in range(4):
+    up(); goto(start.x, start.y); down(); begin_fill()
+    for _ in range(4):
         forward(end.x - start.x)
         left(90)
-
     end_fill()
 
-
 def circle(start, end):
-    """Draw circle from start to end."""
-    pass  # TODO
-
+    """Draw circle centered at start with radius = distance(start,end)."""
+    dx = end.x - start.x
+    dy = end.y - start.y
+    r = math.hypot(dx, dy)
+    if r <= 0:
+        return
+    up(); goto(start.x, start.y); setheading(0)
+    up(); goto(start.x - r, start.y); down()
+    begin_fill(); turtle.circle(r); end_fill()
 
 def rectangle(start, end):
-    """Draw rectangle from start to end."""
-    pass  # TODO
-
+    """Draw rectangle with width=end.x-start.x and height=end.y-start.y."""
+    w = end.x - start.x
+    h = end.y - start.y
+    up(); goto(start.x, start.y); down(); begin_fill()
+    for _ in range(2):
+        forward(w); left(90)
+        forward(h); left(90)
+    end_fill()
 
 def triangle(start, end):
     """Draw triangle from start to end."""
     pass  # TODO
 
-
 def tap(x, y):
     """Store starting point or draw shape."""
     start = state['start']
-
     if start is None:
         state['start'] = vector(x, y)
     else:
-        shape = state['shape']
-        end = vector(x, y)
+        shape = state['shape']; end = vector(x, y)
         shape(start, end)
         state['start'] = None
-
 
 def store(key, value):
     """Store value in state at key."""
     state[key] = value
-
 
 state = {'start': None, 'shape': line}
 setup(420, 420, 370, 0)
 onscreenclick(tap)
 listen()
 onkey(undo, 'u')
+
+# Colores
 onkey(lambda: color('black'), 'K')
 onkey(lambda: color('white'), 'W')
 onkey(lambda: color('green'), 'G')
 onkey(lambda: color('blue'), 'B')
 onkey(lambda: color('red'), 'R')
+onkey(lambda: color('purple'), 'P')  # NUEVO color
+
+# Formas
 onkey(lambda: store('shape', line), 'l')
 onkey(lambda: store('shape', square), 's')
 onkey(lambda: store('shape', circle), 'c')
 onkey(lambda: store('shape', rectangle), 'r')
 onkey(lambda: store('shape', triangle), 't')
+
 done()
+
