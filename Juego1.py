@@ -1,4 +1,4 @@
-"""Paint, for drawing shapes.
+""Paint, for drawing shapes.
 
 Exercises
 1. Add a color.           ✅ (purple / P)
@@ -25,15 +25,15 @@ def square(start, end):
     end_fill()
 
 def circle(start, end):
-    """Draw circle centered at start with radius = distance(start,end)."""
-    dx = end.x - start.x
-    dy = end.y - start.y
-    r = math.hypot(dx, dy)
-    if r <= 0:
-        return
-    up(); goto(start.x, start.y); setheading(0)
-    up(); goto(start.x - r, start.y); down()
-    begin_fill(); turtle.circle(r); end_fill()
+
+    """Draw circle centered at start with radius=distacnce(start,end)."""
+up(); goto(start.x, start.y); setheading(0) #heading conocido
+up(); goto(start.x -r, start.y); down()
+begin_fill()
+turtle.circle(r) #usar la función de turtle
+end_fill()
+    pass  # TODO
+
 
 def rectangle(start, end):
     """Draw rectangle with width=end.x-start.x and height=end.y-start.y."""
@@ -75,7 +75,7 @@ onkey(lambda: color('white'), 'W')
 onkey(lambda: color('green'), 'G')
 onkey(lambda: color('blue'), 'B')
 onkey(lambda: color('red'), 'R')
-onkey(lambda: color('purple'), 'P')  # NUEVO color
+onkey(lambda: color('purple'), 'P')  # Nuevo color
 
 # Formas
 onkey(lambda: store('shape', line), 'l')
@@ -85,4 +85,3 @@ onkey(lambda: store('shape', rectangle), 'r')
 onkey(lambda: store('shape', triangle), 't')
 
 done()
-
