@@ -4,7 +4,7 @@ Exercises
 1. Add a color.           ✅ (purple / P)
 2. Complete circle.       ✅
 3. Complete rectangle.    ✅
-4. Complete triangle.
+4. Complete triangle.     ✅
 """
 
 import turtle
@@ -46,8 +46,15 @@ def rectangle(start, end):
     end_fill()
 
 def triangle(start, end):
-    """Draw triangle from start to end."""
-    pass  # TODO
+    """Draw an equilateral triangle with side = distance(start,end)."""
+    side = math.hypot(end.x - start.x, end.y - start.y)
+    if side <= 0:
+        return
+    up(); goto(start.x, start.y); down(); begin_fill()
+    for _ in range(3):
+        forward(side)
+        left(120)
+    end_fill()
 
 def tap(x, y):
     """Store starting point or draw shape."""
