@@ -1,4 +1,4 @@
-"""Paint, for drawing shapes.
+""Paint, for drawing shapes.
 
 Exercises
 
@@ -37,7 +37,12 @@ def square(start, end):
 
 
 def circle(start, end):
-    """Draw circle from start to end."""
+    """Draw circle centered at start with radius=distacnce(start,end)."""
+up(); goto(start.x, start.y); setheading(0) #heading conocido
+up(); goto(start.x -r, start.y); down()
+begin_fill()
+turtle.circle(r) #usar la función de turtle
+end_fill()
     pass  # TODO
 
 
